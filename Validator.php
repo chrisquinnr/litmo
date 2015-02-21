@@ -18,10 +18,10 @@ class Validator {
 		if(null == $string) return false;
 
 
-
-
-		if(strlen($string) > 80){
+		if(strlen($string) > 100){
 			return true;
+		} else {
+			return false;
 		}
 	}
 

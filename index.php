@@ -4,15 +4,21 @@ require_once 'Core.php';
 
 $core = new Core();
 
-$sentences['crimenpunsum']['title'] = 'Crimen Punsum';
-$sentences['crimenpunsum']['real_title'] = 'Crime and Punishment';
-$sentences['crimenpunsum']['anchor'] = 'crimenpunsum';
-$sentences['crimenpunsum']['quote'] = $core->getSentence('source/pg2554.txt');
+	$sentences['crimenpunsum']['title'] = 'Crimen Punsum';
+	$sentences['crimenpunsum']['real_title'] = 'Crime and Punishment';
+	$sentences['crimenpunsum']['anchor'] = 'crimenpunsum';
+	$sentences['crimenpunsum']['quote'] = $core->getSentence('source/pg2554.txt');
 
-$sentences['talemtwosum']['title'] = 'Tailem Twosum';
-$sentences['talemtwosum']['real_title'] = 'A Tail of Two Cities';
-$sentences['talemtwosum']['anchor'] = 'tailemtwosum';
-$sentences['talemtwosum']['quote'] = $core->getSentence('source/pg98.txt');
+	$sentences['talemtwosum']['title'] = 'Tailem Twosum';
+	$sentences['talemtwosum']['real_title'] = 'A Tail of Two Cities';
+	$sentences['talemtwosum']['anchor'] = 'tailemtwosum';
+	$sentences['talemtwosum']['quote'] = $core->getSentence('source/pg98.txt');
+
+	$sentences['studmenscarlem']['title'] = 'Studmen Scarlem';
+	$sentences['studmenscarlem']['real_title'] = 'A Study in Scarlet';
+	$sentences['studmenscarlem']['anchor'] = 'studmenscarlem';
+	$sentences['studmenscarlem']['quote'] = $core->getSentence('source/pg244.txt');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +41,11 @@ $sentences['talemtwosum']['quote'] = $core->getSentence('source/pg98.txt');
 </head>
 
 <body>
-
+<script>
+	function copyToClipboard(text) {
+		window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+	}
+</script>
 <div class="container">
 	<div class="header">
 		<nav>
@@ -85,7 +95,7 @@ $sentences['talemtwosum']['quote'] = $core->getSentence('source/pg98.txt');
 				<h2><? echo $s['title'] ?></h2>
 				<p><em><? echo $s['real_title']; ?></em></p>
 				<p class="well">
-					<? echo $s['quote'] ?>
+					<textarea cols="80" rows="8" onclick="copyToClipboard(this.value)"><? echo preg_replace( "/\r|\n/", "", $s['quote']) ?></textarea>
 				</p>
 			<? }
 		?>

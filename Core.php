@@ -47,14 +47,10 @@ class Core {
 
             if($this->validator->checkStringIntegrity($exploded[$id])){
                 $pass = true;
-            } else {
-                $pass = false;
             }
         }
 
         return $exploded[$id];
-
-
 
     }
 
