@@ -4,21 +4,7 @@ require_once 'Core.php';
 
 $core = new Core();
 
-	$sentences['crimenpunsum']['title'] = 'Crimen Punsum';
-	$sentences['crimenpunsum']['real_title'] = 'Crime and Punishment';
-	$sentences['crimenpunsum']['anchor'] = 'crimenpunsum';
-	$sentences['crimenpunsum']['quote'] = $core->getSentence('source/pg2554.txt');
-
-	$sentences['talemtwosum']['title'] = 'Tailem Twosum';
-	$sentences['talemtwosum']['real_title'] = 'A Tail of Two Cities';
-	$sentences['talemtwosum']['anchor'] = 'tailemtwosum';
-	$sentences['talemtwosum']['quote'] = $core->getSentence('source/pg98.txt');
-
-	$sentences['studmenscarlem']['title'] = 'Studmen Scarlem';
-	$sentences['studmenscarlem']['real_title'] = 'A Study in Scarlet';
-	$sentences['studmenscarlem']['anchor'] = 'studmenscarlem';
-	$sentences['studmenscarlem']['quote'] = $core->getSentence('source/pg244.txt');
-
+$sentences = $core->getData('all');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +37,9 @@ $core = new Core();
 		<nav>
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation" class="active"><a href="#">Home</a></li>
-				<li role="presentation"><a href="#">About</a></li>
-				<li role="presentation"><a href="#">Contact</a></li>
+				<li role="presentation"><a href="#about">About</a></li>
+				<li role="presentation"><a href="#faq">FAQ</a></li>
+
 			</ul>
 		</nav>
 		<h3 class="text-muted">Litmo</h3>
@@ -61,7 +48,7 @@ $core = new Core();
 	<div class="jumbotron">
 		<h1>Litmo</h1>
 		<p class="lead">Life's too short for Lorem Ipsum. Get interesting filler for your website, now. It's as easy as copy paste, or use our API. <br/><br/>Help banish Lorem forever.</p>
-		<p><a class="btn btn-lg btn-success" href="#crimenpunsum" role="button">Get Litmo</a></p>
+		<p><a class="btn btn-lg btn-success" href="#samples" role="button">Get Litmo</a></p>
 	</div>
 
 	<div class="row marketing">
@@ -70,7 +57,7 @@ $core = new Core();
 			<p>You're getting your placeholder text from a site with <em>ads</em>? Jeez.</p>
 
 			<h4>Interesting</h4>
-			<p>What the hell does all that latin mean?. Turns out its sorta weird.</p>
+			<p>What the hell does all that latin mean? Turns out its <a href='http://www.lipsum.com/'>sorta weird.</a></p>
 
 			<h4>Unique</h4>
 			<p>No client of yours is going to be turned off by dull placeholder text!</p>
@@ -78,30 +65,107 @@ $core = new Core();
 
 		<div class="col-lg-6">
 			<h4>Simple copypasta...</h4>
-			<p>Head on down to the samples below. Copy / paste. Then go away.</p>
+			<p>Head on down to the <a href="#samples">samples below</a>. Copy / paste. Then go away.</p>
 
 			<h4>... or use our powerful API</h4>
-			<p>Oh, now this is cool. Check this out. No more blank pages!</p>
+			<p>Oh, now this is cool. <a href="#api">Check this out</a>. No more blank pages!</p>
 
 			<h4>We need six headings</h4>
 			<p>Run out of things to say? Like we have here? Your worries are at an end.</p>
 		</div>
 	</div>
 	<div class="row marketing">
+
+		<hr/>
+		<a name="api"></a>
+		<h2>API</h2>
+
+			<h3>How to:</h3>
+			<p>
+				It's as simple as:
+			</p>
+				<pre> http://litmo.localhost/api/?action=litmo</pre>
+			<p>
+				Which returns a random string from a random classic novel.
+			</p>
+			<p>
+				Or, if you want something specific, choose a text from our library.
+			</p>
+				<pre>http://litmo.localhost/api/?action=id&id=1</pre>
+			<p class="alert alert-info">
+				Bear in mind we're not Gutenberg. If you want to get clever, go ahead and fork this project and find a way of making <em>that</em> happen, because that would be even more awesome.
+			</p>
+			<br/>
+		<h3>What the hell would I use this for?</h3>
+
+			<small></small>
+			<p>
+				Mainly for wireframes / "greysites" / prototypes / mockups. See, Lorem Ipsum screams <em>unfinished</em>, whereas some real, albeit random, text gives the impression of a living, breathing entity.
+			</p>
+			<p>
+				Makes most sense if you're using templates expecting to load content within the context of a CMS. So, typically, you could test to see if any content will be output, and if not, grab some Litmo.<br/><br/> For example:
+			</p>
+			<pre>if(strlen($content < 1)){
+	echo file_get_contents('http://litmo.localhost/api/?action=litmo');
+}
+</pre>
+			<br/>
+		<h3>Coming soon</h3>
+			<p>
+				> Pass the API a character limit and it will cap the return for you, which I guess could be handy for testing apps that pump out content to twitter.
+			</p>
+			<p>
+				> Offer options to strip quotes and other non alphanumeric chars
+			</p>
+
+
+	</div>
+	<div class="row marketing">
+		<a name="samples"></a>
+		<h2>Samples!</h2>
 		<?php
 			foreach ($sentences as $s){ ?>
 				<hr/>
 				<a name ='<? echo $s['anchor'] ?>'></a>
-				<h2><? echo $s['title'] ?></h2>
+				<h3><? echo $s['title'] ?></h3>
 				<p><em><? echo $s['real_title']; ?></em></p>
+				<p><small>1. Click the text below<br/>
+						2. Ctrl + C  &nbsp;/&nbsp;  Cmd + C to copy<br/>
+						3. Hit enter</small></p>
 				<p class="well">
-					<textarea cols="80" rows="8" onclick="copyToClipboard(this.value)"><? echo preg_replace( "/\r|\n/", "", $s['quote']) ?></textarea>
+					<textarea cols="80" rows="8" onclick="copyToClipboard(this.value)"><? echo preg_replace( "/\r|\n/", "", $core->getSentence($s['source'])) ?></textarea>
 				</p>
 			<? }
 		?>
 	</div>
+	<div class="row marketing">
+		<hr/>
+		<a name="about"></a>
+		<h2>About</h2>
+		<p>
+			My name is Chris Quinn, find me on <a href="https://www.linkedin.com/in/chrisquinnr">LinkedIn</a>, <a href="http://q.branded.me">my landing page</a> or <a href="https://twitter.com/chrisquinnr">Twitter</a>. I'm the tech lead at an advertising agency in Bath, UK and a general developer of web things, from sites to fully fledged RIAs. This project is something I do in any spare time left over at the end of the day <small>which may explain a lot</small>.
+		</p>
+	</div>
+	<div class="row marketing">
+		<hr/>
+		<a name="faq"></a>
+		<h2>FAQ</h2>
+			<h3>Could you add "Title I really want"?</h3>
+				<p>No. I might open up a vote based system for adding new stuff later, but the current roster is at my discretion to avoid copyright wrangles and being swamped by requests for the Karma Sutra.</p>
 
+			<h3>Your code is awful</h3>
+				<p>Yes, but that's not a question. Pull requests welcome.</p>
 
+			<h3>I have a feature request!</h3>
+				<p>Hooray!</p>
+
+			<h3>I've already seen this app done before</h3>
+				<p>Probably. I just made this for fun :) I have no doubt wiser and better coders have made something like this in FORTRAN or in Biscuit.js or whatever the newest JS "framework" is.</p>
+
+			<h3>Ewww, PHP?</h3>
+				<p>Haters gonna hate. I actually like PHP. Proud to say so.</p>
+
+	</div>
 
 
 	<footer class="footer">

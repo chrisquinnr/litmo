@@ -12,20 +12,59 @@ class Core {
 
     public $validator;
 
+    public $sources = array(
+        0 => array(
+            'title' => 'Crimen Punsum',
+            'real_title' => 'Crime and Punishment',
+            'anchor' => 'crimenpunsum',
+            'source' => '/Users/chris/Sites/Litmo/source/pg2554.txt'),
+        1 => array(
+            'title' => 'Studmen Scarlem',
+            'real_title' => 'A Study in Scarlet',
+            'anchor' => 'studmenscarlem',
+            'source' => '/Users/chris/Sites/Litmo/source/pg244.txt'),
+        2 => array(
+            'title' => 'Tailem Twosum',
+            'real_title' => 'A Tail of Two Cities',
+            'anchor' => 'tailemtwosum',
+            'source' => '/Users/chris/Sites/Litmo/source/pg98.txt')
+    );
+
+
     public function __construct(){
-        //'pg2554.txt'
-        //'pg98.txt'
         $this->validator = new Validator();
     }
 
+    public function getData($id = false){
+
+        if(!isset($id)) {
+            return false;
+        }
+
+        if($this->validator->checkID($this->sources, $id)){
+
+            return $this->sources[$id];
+
+        }elseif($id == 'all'){
+
+            return $this->sources;
+
+        } else {
+
+            return false;
+
+        }
+
+
+    }
+
     public function getSentence($source_path = null){
+
         if(null == $source_path){
             return "No source supplied :(";
         }
 
-        if($this->validator->checkFile($source_path)){
-            return $this->randomize($this->parseFile($source_path));
-        }
+        return $this->validator->cleanResponse($this->randomize($this->parseFile($source_path)));
 
 
     }
