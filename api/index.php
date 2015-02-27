@@ -7,9 +7,10 @@
  */
 require_once 'CoreAPI.php';
 
+if(class_exists(CoreAPI)) {
+	$api = new CoreAPI( $_GET['action'], $_GET['id'] );
+} else {
+	die('An error occurred loading the application');
+}
 
-$api = new CoreAPI($_GET['action'], $_GET['id']);
-
-print_r($api);
-echo 'API';
 

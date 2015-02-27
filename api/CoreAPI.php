@@ -10,22 +10,13 @@ require_once '../Core.php';
 
 class CoreAPI {
 
-// This is the API, 2 possibilities: show the app list or show a specific app by id.
-// This would normally be pulled from a database but for demo purposes, I will be hardcoding the return values.
-
 	public $core;
 
 	public $allowed = array('litmo', 'id');
 
 	public function __construct($action = null, $id = null){
 
-		if(!$action) {
-			return false;
-		}
-
 		$this->core = new Core();
-
-		//$action = $_GET['action'];
 
 		if($action){
 			if(in_array($action, $this->allowed)){
@@ -42,17 +33,21 @@ class CoreAPI {
 						break;
 
 					case 'random':
-
 					default :
 						$return = $this->getLitmo();
-						//return JSON array
+
 						break;
 				}
 
 				$return = $this->core->validator->cleanResponse($return);
 
 				exit($return);
+
+			} else {
+				exit('Not a valid action');
 			}
+		} else {
+			exit('No action provided');
 		}
 
 	}
@@ -61,7 +56,6 @@ class CoreAPI {
 	 *
 	 * Returns a random string from a random source
 	 *
-	 * @param null $id
 	 * @return array
 	 */
 	private function getLitmo(){
@@ -75,6 +69,12 @@ class CoreAPI {
 
 	}
 
+	/**
+	 * Returns a random string from a specified source
+	 *
+	 * @param null $id
+	 * @return string
+	 */
 	private function getFromID($id = null){
 
 		if($this->core->validator->checkID($this->core->sources, $id)){

@@ -69,6 +69,15 @@ class Core {
 
     }
 
+    /**
+     * Accepts a source path, loads the file, then explodes it into an array
+     *
+     * TODO Only working off full stops, could be more graceful
+     *
+     * @param $source_path
+     *
+     * @return array
+     */
     private function parseFile($source_path){
 
         $source = file_get_contents($source_path);
@@ -77,6 +86,13 @@ class Core {
 
     }
 
+    /**
+     * Takes the exploded array from parseFile and returns a
+     * key => value pair that passes checkStringIntegrity
+     * @param $exploded
+     *
+     * @return mixed
+     */
     private function randomize($exploded){
 
         $pass = false;
