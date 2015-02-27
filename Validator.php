@@ -56,7 +56,7 @@ class Validator {
 	 */
 	public function cleanResponse($response){
 
-		$response = str_replace(array("\r\n", "\n\r", "\r", "\n"), "", $response);
+		$response = str_replace(array("\r\n", "\n\r", "\r", "\n"), " ", $response);
 		return nl2br($response);
 
 	}

@@ -5,6 +5,13 @@ require_once 'Core.php';
 $core = new Core();
 
 $sentences = $core->getData('all');
+
+$site_name = sprintf(
+	"%s://%s%s",
+	isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+	$_SERVER['SERVER_NAME'],
+	$_SERVER['REQUEST_URI']
+);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,14 +91,14 @@ $sentences = $core->getData('all');
 			<p>
 				It's as simple as:
 			</p>
-				<pre> http://litmo.localhost/api/?action=litmo</pre>
+				<pre><?php echo $site_name; ?>api/?action=litmo</pre>
 			<p>
 				Which returns a random string from a random classic novel.
 			</p>
 			<p>
 				Or, if you want something specific, choose a text from our library.
 			</p>
-				<pre>http://litmo.localhost/api/?action=id&id=1</pre>
+				<pre><?php echo $site_name; ?>api/?action=id&id=1</pre>
 			<p class="alert alert-info">
 				Bear in mind we're not Gutenberg. If you want to get clever, go ahead and fork this project and find a way of making <em>that</em> happen, because that would be even more awesome.
 			</p>
@@ -106,7 +113,7 @@ $sentences = $core->getData('all');
 				Makes most sense if you're using templates expecting to load content within the context of a CMS. So, typically, you could test to see if any content will be output, and if not, grab some Litmo.<br/><br/> For example:
 			</p>
 			<pre>if(strlen($content < 1)){
-	echo file_get_contents('http://litmo.localhost/api/?action=litmo');
+	echo file_get_contents('<?php echo $site_name; ?>api/?action=litmo');
 }
 </pre>
 			<br/>
