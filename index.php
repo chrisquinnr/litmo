@@ -57,7 +57,11 @@ $site_name = sprintf(
 		<p class="lead">Life's too short for Lorem Ipsum. Get interesting filler for your website, now. It's as easy as copy paste, or use our API. <br/><br/>Help banish Lorem forever.</p>
 		<p><a class="btn btn-lg btn-success" href="#samples" role="button">Get Litmo</a></p>
 	</div>
-
+	<div>
+		<p class="alert alert-success">
+			<a href="https://github.com/chrisquinnr/litmo/">Check out this project on Github</a>
+		</p>
+	</div>
 	<div class="row marketing">
 		<div class="col-lg-6">
 			<h4>No ads</h4>
