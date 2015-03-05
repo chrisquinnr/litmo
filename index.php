@@ -1,5 +1,4 @@
 <?php
-
 require_once 'Core.php';
 
 $core = new Core();
@@ -144,9 +143,9 @@ $site_name = sprintf(
 						2. Ctrl + C  &nbsp;/&nbsp;  Cmd + C to copy<br/>
 						3. Hit enter</small></p>
 				<p class="well">
-					<textarea cols="80" rows="8" onclick="copyToClipboard(this.value)"><? echo preg_replace( "/\r|\n/", "", $core->getSentence($s['source'])) ?></textarea>
+					<textarea cols="80" rows="8" onclick="copyToClipboard(this.value)"><?php echo preg_replace( "/\r|\n/", "", $core->getSentence($s['source'])) ?></textarea>
 				</p>
-			<? }
+			<?php }
 		?>
 	</div>
 	<div class="row marketing">

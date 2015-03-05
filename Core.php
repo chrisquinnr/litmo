@@ -41,7 +41,7 @@ class Core {
             return false;
         }
 
-        if($this->validator->checkID($this->sources, $id)){
+        if(is_int($id) && $this->validator->checkID($this->sources, $id)){
 
             return $this->sources[$id];
 
