@@ -37,6 +37,9 @@ class Core {
 
     public function getData($id = false){
 
+        // Testing unit test fail
+        return false;
+
         if(!isset($id)) {
             return false;
         }
